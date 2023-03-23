@@ -5,6 +5,6 @@ default:
         PORT: 8001
         LOG_LEVEL: 'info'
         LOG_CONFIG_PATH: 'src/app/logger/log_conf.yaml'
-        ORIGINS: ['http://localhost:63342', 'http://localhost']
+        ORIGINS: ['*']
     gpt:
         MODEL_NAME: 'gpt-3.5-turbo'
