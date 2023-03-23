@@ -2,8 +2,34 @@ var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
-var colors = [ 'aqua' , 'azure' , 'beige', 'bisque', 'black', 'blue', 'brown', 'chocolate', 'coral', 'crimson', 'cyan', 'fuchsia', 'ghostwhite', 'gold', 'goldenrod', 'gray', 'green', 'indigo', 'ivory', 'khaki', 'lavender', 'lime', 'linen', 'magenta', 'maroon', 'moccasin', 'navy', 'olive', 'orange', 'orchid', 'peru', 'pink', 'plum', 'purple', 'red', 'salmon', 'sienna', 'silver', 'snow', 'tan', 'teal', 'thistle', 'tomato', 'turquoise', 'violet', 'white', 'yellow'];
+var diagnostic = document.querySelector('.output');
+const recognition = new SpeechRecognition();
+recognition.interimResults = true;
 
+recognition.addEventListener('result', e => {
+  const transcript = Array.from(e.results)
+      .map(result => result[0])
+      .map(result => result.transcript)
+      .join('');
+  console.log(transcript);
+});
+
+recognition.addEventListener('end', recognition.start);
+
+recognition.onresult = function(event) {
+
+  var color = event.results[0][0].transcript;
+  diagnostic.textContent = 'Result received: ' + color + '.';
+
+  console.log('Confidence: ' + event.results[0][0].confidence);
+  setInterval(function() {
+    console.log(transcript);
+  }, 20000);
+
+}
+
+recognition.start();
+/*
 var recognition = new SpeechRecognition();
 if (SpeechGrammarList) {
   // SpeechGrammarList is not currently available in Safari, and does not have any effect in any other browser.
@@ -28,7 +54,6 @@ colors.forEach(function(v, i, a){
   colorHTML += '<span style="background-color:' + v + ';"> ' + v + ' </span>';
 });
 hints.innerHTML = 'Tap/click then say a color to change the background color of the app. Try ' + colorHTML + '.';
-
 
 document.body.onclick = function() {
   recognition.start();
@@ -61,3 +86,4 @@ recognition.onnomatch = function(event) {
 recognition.onerror = function(event) {
   diagnostic.textContent = 'Error occurred in recognition: ' + event.error;
 }
+*/
