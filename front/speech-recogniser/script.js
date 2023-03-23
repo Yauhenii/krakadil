@@ -1,3 +1,26 @@
+function send_req(data, id){
+
+  fetch('http://localhost:8001/dump', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    },
+    body: JSON.stringify({
+      id: id,
+      text: data
+    })
+  })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+}
+
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
@@ -26,9 +49,13 @@ recognition.onresult = function(event) {
     console.log(transcript);
   }, 20000);
 
+  send_req(color, 1);
+
 }
 
 recognition.start();
+
+
 /*
 var recognition = new SpeechRecognition();
 if (SpeechGrammarList) {
