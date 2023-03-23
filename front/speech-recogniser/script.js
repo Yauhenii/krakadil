@@ -1,26 +1,57 @@
-function send_req(data, id){
-
-  fetch('http://localhost:8001/dump', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'accept': 'application/json'
-    },
-    body: JSON.stringify({
-      id: id,
-      text: data
+function send_req(data, id) {
+    fetch('http://localhost:8001/dump', {
+    // fetch('http://localhost:8001/ask', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'accept': 'application/json'
+        },
+        body: JSON.stringify({
+            id: id,
+            text: data
+        })
     })
-  })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("Success:", data);
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
 
 }
 
+const recognition = new webkitSpeechRecognition()
+recognition.continuous = true
+recognition.lang = 'de-DE'
+recognition.start()
+
+let activity = []
+
+const min = 0;
+const max = 1000000;
+const token = Math.floor(Math.random() * (max - min + 1)) + min;
+//console.log(c); // 16
+
+recognition.onresult = event => {
+    console.log(event)
+    activity.push('Ended:' + event.timeStamp)
+    //console.log(event.results.length)
+    const transcript = event.results[event.results.length - 1][0].transcript;
+    console.log(transcript);
+    // event.results = [];
+    send_req(transcript, token);
+}
+
+recognition.onspeechstart = event => {
+    activity.push('Started:' + event.timeStamp)
+}
+
+//window.end = recognition.onend = event => {
+// console.log(activity)
+//}
+
+/*
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
@@ -41,20 +72,20 @@ recognition.addEventListener('end', recognition.start);
 
 recognition.onresult = function(event) {
 
-  var color = event.results[0][0].transcript;
-  diagnostic.textContent = 'Result received: ' + color + '.';
+  var sentence = event.results[0][0].transcript;
+  diagnostic.textContent = 'Result received: ' + sentence + '.';
 
   console.log('Confidence: ' + event.results[0][0].confidence);
   setInterval(function() {
     console.log(transcript);
   }, 20000);
 
-  send_req(color, 1);
+  send_req(sentence, 1);
 
 }
 
 recognition.start();
-
+/*
 
 /*
 var recognition = new SpeechRecognition();
