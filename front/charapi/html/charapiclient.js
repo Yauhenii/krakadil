@@ -9,12 +9,12 @@ function send_req(data, id) {
         body: JSON.stringify({
             id: id,
             text: data
-        })
+        }, {mode: 'no-cors' })
     })
         .then((response) => response.json())
         .then((data) => {
             console.log(data)
-            character.dynamicPlay({say:+data.text})
+            character.dynamicPlay({say:'[german]' + data.text + '[/german]'})
         })
         .catch((error) => {
             console.error("Error:", error);
@@ -23,7 +23,9 @@ function send_req(data, id) {
 
 const recognition = new webkitSpeechRecognition()
 recognition.continuous = true
-recognition.lang = 'de-DE'
+
+recognition.lang = 'en-EN'
+recognition.interimResults = true
 recognition.start()
 
 let activity = []
@@ -46,12 +48,14 @@ recognition.onresult = event => {
     let is_final = event.results[event.results.length - 1].isFinal // is the word was the last in the sentence
     const transcript = event.results[event.results.length - 1][0].transcript; // current sentence
     console.log(event.results[event.results.length - 1].isFinal)
+    console.log(transcript);
     if (is_final) {
         console.log(transcript);
         character.stop();
         send_req(transcript, token)
     }
-
+    console.log(transcript);
+    // console.log(event.results[event.results.length - 1].length)
     if (event.results[event.results.length - 1][0].length === stop_offset) {
         console.log("stopped");
         character.stop();
