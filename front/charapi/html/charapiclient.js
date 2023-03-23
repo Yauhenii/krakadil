@@ -13,7 +13,8 @@ function send_req(data, id) {
     })
         .then((response) => response.json())
         .then((data) => {
-            return data.data
+            console.log(data)
+            character.dynamicPlay({say:data.text})
         })
         .catch((error) => {
             console.error("Error:", error);
@@ -36,33 +37,35 @@ const token = Math.floor(Math.random() * (max - min + 1)) + min;
 
 
 // Define a flag variable to track whether space input has been detected or not
-var spaceDetected = false;
+// var spaceDetected = false;
 
 // Add an event listener for the input event
 
-input.addEventListener("input", function (e) {
+// input.addEventListener("input", function (e) {
     // Get the value of the input
-    var value = e.target.value;
+   // var value = e.target.value;
 
     // Check if the value includes a space character and spaceDetected is false
-    if (value.includes(" ") && !spaceDetected) {
+  //  if (value.includes(" ") && !spaceDetected) {
         // Set spaceDetected to true
-        spaceDetected = true;
+    //    spaceDetected = true;
 
         // React on space input only once here
-        console.log("Space input detected");
-    }
-});
+    //    console.log("Space input detected");
+  //  }
+//});
 
 recognition.onresult = event => {
     console.log(event)
-    let is_final = event.results[event.results.length - 1][0].isFinal // is the word was the last in the sentence
+    let is_final = event.results[event.results.length - 1].isFinal // is the word was the last in the sentence
     const transcript = event.results[event.results.length - 1][0].transcript; // current sentence
-
+    console.log(event.results[event.results.length - 1].isFinal)
     if (is_final) {
         console.log(transcript);
         character.stop();
-        character.dynamicPlay({say:send_req(transcript, token)})
+        send_req(transcript, token)
+      //  console.log(ans)
+       // character.dynamicPlay({say:ans})
     }
 
     if (event.results[event.results.length - 1][0].length === stop_offset) {
