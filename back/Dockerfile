@@ -22,5 +22,6 @@ ENV PATH=/venv/bin:$PATH
 COPY config/. config
 COPY src/. src
 VOLUME ["/test_data"]
+EXPOSE 8001
 # run
 CMD ["python3", "src/app/main_run_api.py"]
