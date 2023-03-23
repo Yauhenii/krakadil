@@ -15,9 +15,9 @@ class GPTAssistant:
         openai.api_key = settings.gpt.api_key
         self.messages = self.initial_messages
 
-    def ask(self, content) -> str:
+    async def ask(self, content) -> str:
         self.messages.append({"role": "user", "content": content})
-        chat_completion = openai.ChatCompletion.create(
+        chat_completion = await openai.ChatCompletion.acreate(
             model="gpt-3.5-turbo",
             messages=self.messages
         )

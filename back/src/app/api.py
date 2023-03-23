@@ -23,5 +23,5 @@ async def post_ask(ask_request: AskRequest):
     else:
         assistant = GPTAssistant()
         assistant_handler[id] = assistant
-    answer_text = assistant.ask(ask_text)
+    answer_text = await assistant.ask(ask_text)
     return AskResponse(id=id, text=answer_text)
