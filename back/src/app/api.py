@@ -1,17 +1,31 @@
 import logging
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
 
 from src.app.data_transfer import AskRequest, AskResponse
 from src.app.assistant import GPTAssistant
+from config import settings
 
 app = FastAPI()
 logger = logging.getLogger("uvicorn.error")
 
 assistant_handler = {}
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.app.origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 @app.post("/dump", status_code=200)
 async def post_dump(ask_request: AskRequest):
-    return {}
+    id = ask_request.id
+    ask_text = ask_request.text
+    print(f"{id} {ask_text}")
+    return AskResponse(id=id, text=ask_text)
 
 
 @app.post("/ask", response_model=AskResponse, status_code=200)
