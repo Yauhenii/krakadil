@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
 
-class DumpRequest(BaseModel):
+class AskRequest(BaseModel):
+    id: str
     text: str
