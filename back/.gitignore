@@ -1,0 +1,9 @@
+# cache
+.idea
+__pycache__
+# secrets
+.secrets.yaml
+# env
+conda_env
+# test
+test.py

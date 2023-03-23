@@ -1,0 +1,1 @@
+from src.app.assistant.GPTAssistant import GPTAssistant
