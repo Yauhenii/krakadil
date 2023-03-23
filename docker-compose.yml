@@ -13,4 +13,4 @@ services:
       context: front
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "443:8080"
