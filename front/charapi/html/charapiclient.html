@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<title>Melissa</title>
+<body style="overflow:hidden;">
+<h1 style="font-family: sans-serif;
+  text-align: center;
+  padding: 20px;
+  color: #3c9229;">AskDed.de</h1>
+
+<script src="charapiclient.js"></script>
+
+<section id="myDiv" style="
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+">
+
+<script>
+// Initialize your character in a div
+var character;
+document.addEventListener("DOMContentLoaded", function() {
+    character = CharApiClient.setupDiv("myDiv", {
+        width: 250,
+        height: 200,
+        // TODO: Replace this with your own endpoint on your own server.
+        endpoint: "http://localhost:3000/animate",
+        // Character API parameters. TODO: If your api works without authentication, e.g. if your page is accessible without a login, then it is wise
+        // to *fix* or *limit* as many parameters as you can in your server code, including a background with a logo, if you can,
+        // in order to minimize the attractiveness of your endpoint for scammers. (CORS helps with this, but it can still be defeated.)
+        character: "CarlaHead",
+        // Character version - get this from the character catalog
+        version: "1.1",
+        // Character idle pattern - get this from the character catalog
+        idleData: {"blink":["blink"],"normal":["blink","headidle1-3"]},
+        // Increment the 'cache' value if you make changes to the parameters you fix in your server.
+        // Even if you delete your server-side cache, your clients may have images in their client cache. Incrementing the
+        // cache number in the client is a simple way to ensure that neither client or server-cached images are accidentally used.
+        cache: 1
+    });
+})
+
+</script>
+</section>
+
+<!--<a href="javascript:character.dynamicPlay({say:document.getElementById('myInput').value})">speak</a> -->
+<!--(<a href="javascript:character.preloadDynamicPlay({say:document.getElementById('myInput').value})">preload</a>,
+<a href="javascript:character.stop()">stop</a>)-->
+
+</body>
+</html>
