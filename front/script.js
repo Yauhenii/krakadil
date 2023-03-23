@@ -1,5 +1,5 @@
 function send_req(data, id) {
-    fetch('http://localhost:8001/dump', {
+    fetch('http://104.199.6.254:8001/dump', {
     // fetch('http://localhost:8001/ask', {
         method: 'POST',
         headers: {
