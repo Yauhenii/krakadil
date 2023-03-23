@@ -1,6 +1,6 @@
 function send_req(data, id) {
-    fetch('http://localhost:8001/dump', {
-        // fetch('http://localhost:8001/ask', {
+    fetch('http://localhost:8001/ask', {
+        // fetch('http://localhost:8001/dumpç', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ function send_req(data, id) {
         .then((response) => response.json())
         .then((data) => {
             console.log(data)
-            character.dynamicPlay({say:data.text})
+            character.dynamicPlay({say:+data.text})
         })
         .catch((error) => {
             console.error("Error:", error);
@@ -27,33 +27,19 @@ recognition.lang = 'de-DE'
 recognition.start()
 
 let activity = []
-let preload_offset = 5
 let stop_offset = 2
 
 const min = 0;
 const max = 1000000;
 const token = Math.floor(Math.random() * (max - min + 1)) + min;
-//console.log(c); // 16
 
-
-// Define a flag variable to track whether space input has been detected or not
-// var spaceDetected = false;
-
-// Add an event listener for the input event
-
-// input.addEventListener("input", function (e) {
-    // Get the value of the input
-   // var value = e.target.value;
-
-    // Check if the value includes a space character and spaceDetected is false
-  //  if (value.includes(" ") && !spaceDetected) {
-        // Set spaceDetected to true
-    //    spaceDetected = true;
-
-        // React on space input only once here
-    //    console.log("Space input detected");
-  //  }
-//});
+document.body.onkeyup = function(e) {
+    if (e.key === " " ||
+        e.code === "Space"
+    ) {
+        character.dynamicPlay({say:'Hallo!'});
+    }
+}
 
 recognition.onresult = event => {
     console.log(event)
@@ -64,22 +50,12 @@ recognition.onresult = event => {
         console.log(transcript);
         character.stop();
         send_req(transcript, token)
-      //  console.log(ans)
-       // character.dynamicPlay({say:ans})
     }
 
     if (event.results[event.results.length - 1][0].length === stop_offset) {
         console.log("stopped");
         character.stop();
     }
-    /*
-    if (event.results[event.results.length - 1][0].length === preload_offset) {
-        const transcript = event.results[event.results.length - 1][0].transcript;
-        console.log("preload");
-        console.log(transcript);
-        send_req(transcript, token);
-        //character.preloadDynamicPlay({say:document.getElementById('myInput').value}
-    }*/
 }
 
 recognition.onspeechstart = event => {
