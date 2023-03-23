@@ -1,0 +1,6 @@
+# cache
+.idea
+# secrets
+.secrets.yaml
+# env
+conda_env
