@@ -1,10 +1,8 @@
 version: "3"
 services:
-  back:
+  head:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8001:8001"
-    environment:
-      - PYTHONPATH=./
+      - "3000:3000"

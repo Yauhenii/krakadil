@@ -6,8 +6,8 @@ from config import settings
 
 class GPTAssistant:
     initial_messages: List = [
-        {"role": "system", "content": "You are a helpful assistant for senior people."},
-        {"role": "assistant", "content": "Hi! How can I help you"}
+        {"role": "system", "content": "You are a helpful assistant for eldery people."},
+        {"role": "assistant", "content": "Make your answers short. Simplify the message, easy to understand is key. Instead of using jargon or medical terms, use simple words that are easier to understand when talking to them. Make your messages short and informal and friendly."}
     ]
     messages: List
 

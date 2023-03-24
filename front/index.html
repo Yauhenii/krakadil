@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<title>Melissa</title>
+<body style="overflow:hidden;">
+
+<script src="charapiclient.js"></script>
+
+<section id="myDiv" style="
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+">
+
+<script>
+// Initialize your character in a div
+var character;
+document.addEventListener("DOMContentLoaded", function() {
+    character = CharApiClient.setupDiv("myDiv", {
+        width: 250,
+        height: 200,
+        // TODO: Replace this with your own endpoint on your own server.
+        endpoint: "http://localhost:3000/animate",
+        // Character API parameters. TODO: If your api works without authentication, e.g. if your page is accessible without a login, then it is wise
+        // to *fix* or *limit* as many parameters as you can in your server code, including a background with a logo, if you can,
+        // in order to minimize the attractiveness of your endpoint for scammers. (CORS helps with this, but it can still be defeated.)
+        character: "CarlaHead",
+        // Character version - get this from the character catalog
+        version: "3.0",
+        // Character idle pattern - get this from the character catalog
+        idleData: {"blink":["blink"],"normal":["blink","headidle1-3"]},
+        // Increment the 'cache' value if you make changes to the parameters you fix in your server.
+        // Even if you delete your server-side cache, your clients may have images in their client cache. Incrementing the
+        // cache number in the client is a simple way to ensure that neither client or server-cached images are accidentally used.
+        cache: 1
+    });
+})
+// Optionally add some event listeners - you add the listener to the div that holds the character
+document.getElementById("myDiv").addEventListener("characterLoaded", function() {console.log("characterLoaded")});
+document.getElementById("myDiv").addEventListener("autoStart", function() {console.log("autoStart")});
+document.getElementById("myDiv").addEventListener("playComplete", function() {console.log("playComplete")});
+document.getElementById("myDiv").addEventListener("embeddedCommand", function() {console.log("embeddedCommand")});
+</script>
+</section>
+
+
+<svg style="
+    width: 50%;
+    height: 50%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+"
+>
+    <circle cy="50%" cx="50%" r="130" stroke="white" stroke-width="18" fill="none"
+            style=""/>
+</svg>
+
+
+<p style="
+  margin: 0;
+  position: absolute;
+  top: 64%;
+  left: 50%;
+  transform: translate(-50%, -50%);">
+    <img src="logo.png" alt="Italian Trulli">
+</p>
+
+</body>
+</html>
