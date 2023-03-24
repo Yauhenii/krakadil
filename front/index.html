@@ -22,9 +22,8 @@ document.addEventListener("DOMContentLoaded", function() {
     character = CharApiClient.setupDiv("myDiv", {
         width: 250,
         height: 200,
-        // TODO: Replace this with your own endpoint on your own server.
         endpoint: "http://localhost:3000/animate",
-        // Character API parameters. TODO: If your api works without authentication, e.g. if your page is accessible without a login, then it is wise
+        // Character API parameters.
         // to *fix* or *limit* as many parameters as you can in your server code, including a background with a logo, if you can,
         // in order to minimize the attractiveness of your endpoint for scammers. (CORS helps with this, but it can still be defeated.)
         character: "CarlaHead",
@@ -54,9 +53,7 @@ document.getElementById("myDiv").addEventListener("embeddedCommand", function() 
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-"
->
+  transform: translate(-50%, -50%);">
     <circle cy="50%" cx="50%" r="130" stroke="white" stroke-width="18" fill="none"
             style=""/>
 </svg>
@@ -68,8 +65,11 @@ document.getElementById("myDiv").addEventListener("embeddedCommand", function() 
   top: 64%;
   left: 50%;
   transform: translate(-50%, -50%);">
-    <img src="logo.png" alt="Italian Trulli">
+    <img src="logo.png" alt="Melissa">
 </p>
+
+<img src="eng.png" id="toggle-btn"
+     style="margin: 0; position: absolute; height: 5%; right: 0.5%" />
 
 </body>
 </html>
