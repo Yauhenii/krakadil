@@ -23,6 +23,7 @@ function send_req(data, id) {
 
 const recognition = new webkitSpeechRecognition()
 recognition.continuous = true
+recognition.start();
 
 recognition.interimResults = true
 
