@@ -14,3 +14,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "443:8080"
+  head:
+    build:
+      context: head
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
