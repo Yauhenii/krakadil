@@ -32,6 +32,7 @@ async def post_dump(ask_request: AskRequest):
 async def post_ask(ask_request: AskRequest):
     id = ask_request.id
     ask_text = ask_request.text
+    print(f"{id} {ask_text}")
     if id in assistant_handler:
         assistant = assistant_handler[id]
     else:
