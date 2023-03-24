@@ -24,9 +24,7 @@ function send_req(data, id) {
 const recognition = new webkitSpeechRecognition()
 recognition.continuous = true
 
-recognition.lang = 'en-EN'
 recognition.interimResults = true
-recognition.start()
 
 let activity = []
 let stop_offset = 2
@@ -42,6 +40,29 @@ document.body.onkeyup = function(e) {
         character.dynamicPlay({say:'Hallo!'});
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    var im = document.getElementById('toggle-btn');
+    var currentImage = 'eng.png';
+    console.log(im);
+    im.addEventListener('click', function() {
+        if (currentImage === 'eng.png') {
+            currentImage = 'german.png';
+
+            recognition.abort();
+            recognition.lang = 'de-DE';
+            setTimeout(function(){ recognition.start(); }, 400);
+
+        } else {
+            currentImage = 'eng.png';
+
+            recognition.abort();
+            recognition.lang = 'en-EN'
+            setTimeout(function(){ recognition.start(); }, 400);
+        }
+        im.src = currentImage;
+    });
+});
 
 recognition.onresult = event => {
     console.log(event)

@@ -1,10 +1,18 @@
-.box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.w8-button {
+    display: table;
+    padding: 7px 15px 8px 15px;
+    border: none;
+    font-family:"open_sans_lightregular";
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.9;
 }
-
-.box div {
-    width: 100px;
-    height: 100px;
+.w8-button.iconize {
+    padding-right: 50px !important;
+    background: url("german.png") no-repeat 5px center;
+}
+.w8-button.iconize2 {
+    padding-right: 50px !important;
+    background: url("eng.png") no-repeat 5px center;
 }
